@@ -30,6 +30,7 @@ async function getPost(req, res) {
   try {
     const user = req.user;
     const email = user.email;
+    console.log(email);
     let post = await Post.find({ email });
 
     let totalPost = await Post.count({ email });
