@@ -53,7 +53,7 @@ async function getPostId(req, res) {
     const { id } = req.params;
     const body = req.body;
 
-    let post = await Post.findOneAndUpdate({ id }, { body });
+    let post = await Post.findByIdAndUpdate(id, { body });
 
     if (post) {
       return res.send({
