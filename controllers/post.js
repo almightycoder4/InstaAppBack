@@ -50,11 +50,19 @@ async function getPost(req, res) {
 
 async function getPostId(req, res) {
   try {
+    const user = req.user;
     const { id } = req.params;
     const body = req.body;
-
-    let post = await Post.findByIdAndUpdate(id, { body });
-
+    const { title, content, device } = req.body;
+    let post = await Post.findByIdAndUpdate(id, {
+      title,
+      content,
+      device,
+      author: {
+        userId: user._id,
+        name: user.name,
+      },
+    });
     if (post) {
       return res.send({
         data: post,
