@@ -58,10 +58,6 @@ async function getPostId(req, res) {
       title,
       content,
       device,
-      author: {
-        userId: user._id,
-        name: user.name,
-      },
     });
     if (post) {
       return res.send({
