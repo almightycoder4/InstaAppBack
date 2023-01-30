@@ -29,11 +29,10 @@ async function createPost(req, res) {
 async function getPost(req, res) {
   try {
     const user = req.user;
-    const email = user.email;
-    console.log(email);
-    let post = await Post.find({ email });
+    const id = user._id;
+    let post = await Post.find({ "author.userId": id });
 
-    let totalPost = await Post.count({ email });
+    let totalPost = await Post.count({ "author.userId": id });
 
     return res.send({
       data: {
